@@ -1,9 +1,12 @@
-# TOEIC Reading Mini-Test 2026 · Ms. Ngọc Huyền
+# TOEIC Mini-Test 2026 · Ms. Ngọc Huyền
 
-31 bài Mini Test Reading (Part 5, Part 6, Part 7 Mini Test 01–10 + Part 7 Full Test), độ khó bám sát YBM 2026, xếp thành lộ trình 3 chặng.
+Hai lộ trình trong một link:
+- **Listening**: 10 đề YBM 2026 (Part 1–4, 100 câu/đề), 5 chế độ luyện + thi thật.
+- **Reading**: 31 bài Mini Test (Part 5, Part 6, Part 7 Mini Test 01–10 + Part 7 Full Test), độ khó bám sát YBM 2026, xếp thành lộ trình 3 chặng.
 Danh sách học viên **riêng**, không dính tới lớp TOEIC Online 500+.
 
-- `index.html`: trang lộ trình. Học viên đăng nhập Google bằng Gmail cô đã kích hoạt.
+- `index.html`: trang lộ trình (2 tab Listening / Reading). Học viên đăng nhập Google bằng Gmail cô đã kích hoạt.
+- `listening/`: app luyện nghe YBM 2026 (`listening/?test=3&exam=all` mở thẳng Thi thật Test 3). Audio, ảnh nằm ở `listening/aud/`.
 - `mt/`: 31 bài Mini Test. Thêm `?thi=1` sau link để vào **chế độ thi thật** (bấm giờ, ẩn đáp án tới khi nộp, tự lưu điểm).
 - `quan-ly.html`: cô thêm, khoá, gia hạn, xoá học viên và xem điểm thi thật. Chỉ tài khoản giáo viên của My English Workspace đăng nhập được.
 - `mt.js`: lưu điểm thi thật lên Firebase (`mt26_progress`).

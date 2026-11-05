@@ -117,10 +117,10 @@ const MSN={dv:"Đầu vào",m1:"Mốc 1",m2:"Mốc 2",m3:"Mốc 3",end:"Cuối k
 async function loadProg(){
   try{ const s=await getDocs(collection(db,"mt26_progress")); const P=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.updatedAt?.toMillis?.()||0)-(a.updatedAt?.toMillis?.()||0));
     $("pb").innerHTML=P.length?P.map(p=>{ const st=rows.find(r=>r.id===p.id); const nm=st?st.name:(p.name||p.id);
-      const E=Object.entries(p.exams||{}); const ag={}; E.forEach(([f,e])=>{const k=f.slice(0,2); ag[k]=ag[k]||[0,0]; ag[k][0]+=e.correct; ag[k][1]+=e.total;}); const sc=['p5','p6','p7'].filter(k=>ag[k]).map(k=>`Part ${k[1]}: <b>${Math.round(ag[k][0]/ag[k][1]*100)}%</b>`).join("<br>")||"–";
+      const E=Object.entries(p.exams||{}); const ER=E.filter(([f])=>/^p[567]/.test(f)), EL=E.filter(([f])=>/^l\d\d$/.test(f)); const ag={}; ER.concat(EL).forEach(([f,e])=>{const k=f[0]==='l'?'LC':f.slice(0,2); ag[k]=ag[k]||[0,0]; ag[k][0]+=e.correct; ag[k][1]+=e.total;}); const bestLC=Math.max(0,...EL.map(([,e])=>e.est||0)); const sc=['LC','p5','p6','p7'].filter(k=>ag[k]).map(k=>`${k==='LC'?'Listening':'Part '+k[1]}: <b>${Math.round(ag[k][0]/ag[k][1]*100)}%</b>${k==='LC'&&bestLC?' · ≈'+bestLC+' LC':''}`).join("<br>")||"–";
       const ex=Object.values(p.exams||{}).sort((a,b)=>b.at-a.at).slice(0,3).map(e=>`${esc(e.title)}: <b>${e.correct}/${e.total}</b>`).join("<br>")||"–";
-      const pct=Math.round(E.length/31*100);
-      return `<tr><td><div class="e">${esc(nm)}</div><div class="n">${esc(p.id)}</div></td><td><b>${E.length}/31</b><div class="n">${pct}%</div></td><td><div class="n" style="color:inherit">${sc}</div></td><td><div class="n" style="color:inherit">${ex}</div></td><td><div class="n">${fmt(p.updatedAt)}</div></td></tr>`; }).join(""):'<tr><td colspan="5">Chưa có học viên nào cập nhật tiến độ.</td></tr>';
+      const pct=Math.round(ER.length/31*100);
+      return `<tr><td><div class="e">${esc(nm)}</div><div class="n">${esc(p.id)}</div></td><td><b>Nghe ${EL.length}/10</b><div class="n">Đọc ${ER.length}/31</div></td><td><div class="n" style="color:inherit">${sc}</div></td><td><div class="n" style="color:inherit">${ex}</div></td><td><div class="n">${fmt(p.updatedAt)}</div></td></tr>`; }).join(""):'<tr><td colspan="5">Chưa có học viên nào cập nhật tiến độ.</td></tr>';
   }catch(e){ $("pb").innerHTML=`<tr><td colspan="5">Không tải được tiến độ (${esc(e.code)}).</td></tr>`; }
 }
 $("pReload").onclick=loadProg;
