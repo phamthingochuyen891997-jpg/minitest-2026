@@ -63,7 +63,7 @@ function errMsg(e){ const c=e&&e.code||"";
 function loginView(msg){
   box().innerHTML=`<div class="mark">MT</div><h1>TOEIC Mini-Test 2026</h1><p>Tài liệu dành riêng cho học viên. Đăng nhập bằng <b>đúng Gmail em đã đăng ký</b> với cô.</p>${inappHTML()}
   <button class="gbtn" id="gg">${G_ICON}<span>Đăng nhập bằng Google</span></button><div class="err" id="err">${msg||""}</div>
-  <div class="alt"><span>Chưa có tài khoản? Nhắn Zalo cô</span><a href="https://zalo.me/0779693605" target="_blank" rel="noopener">Zalo cô Huyền</a></div>`;
+  <div class="alt"><span>Chưa có tài khoản? <a href="https://my-english-workspace-cf8d7.web.app/dashboard-student.html?goi=minitest-2026">Mua online</a> hoặc nhắn Zalo cô</span><a href="https://zalo.me/0779693605" target="_blank" rel="noopener">Zalo cô Huyền</a></div>`;
   document.getElementById("gg").onclick=signIn; wireCopy();
 }
 function deniedView(email,reason){
